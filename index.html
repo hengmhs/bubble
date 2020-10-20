@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Bubble Game</title>
+  <style>
+    table {
+      table-layout: fixed;
+      width:100%;
+      height:100%;
+      padding:0px;
+    }
+    .b {
+      background-image: url(images/blue.png);
+      background-size: 100% 100%;
+      height: 5%;
+      width: 5%; /*custom for 20x20 grid - 100%/20 means each element is 5%*/
+      background-repeat: no-repeat;
+    }
+
+    .banim {
+      background-image: url(images/blueanim.gif);
+      background-size: 100% 100%;
+      height: 5%;
+      width: 5%;
+      background-repeat: no-repeat;
+    }
+
+    .r {
+      background-image: url(images/red.png);
+      background-size: 100% 100%;
+      height: 5%;
+      width: 5%;
+      background-repeat: no-repeat;
+    }
+
+    .ranim {
+      background-image: url(images/redanim.gif);
+      background-size: 100% 100%;
+      height: 5%;
+      width: 5%;
+      background-repeat: no-repeat;
+    }
+
+    .g {
+      background-image: url(images/green.png);
+      background-size: 100% 100%;
+      height: 5%;
+      width: 5%;
+      background-repeat: no-repeat;
+    }
+
+    .ganim {
+      background-image: url(images/greenanim.gif);
+      background-size: 100% 100%;
+      height: 5%;
+      width: 5%;
+      background-repeat: no-repeat;
+    }
+
+    .e {
+      background-size: 100% 100%;
+      height: 5%;
+      width: 5%;
+    }
+
+    .eanim {
+      background-size: 100% 100%;
+      height: 5%;
+      width: 5%;
+    }
+
+    body {
+      background-image: url(images/background.jpg); 
+    }
+
+    h1 {
+      font-family: Arial, Helvetica, sans-serif;
+      color: white;
+      text-shadow: 1px 1px black;
+      text-align: center;
+    }
+
+    h2 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 100;
+      color: white;
+      text-shadow: 1px 1px black;
+      text-align: center;
+    }
+
+
+    .center {
+      margin: auto;
+      width: 400px; /* fixed width for 20x20 grid (20px * 20 columns = 400px) */
+      height: 400px;
+      border: 3px solid whitesmoke;
+    }
+
+    #birds {
+      position: relative;
+      z-index: 1;
+    }
+
+    #grid {
+      z-index: 2;
+      position: absolute;
+      margin-left: auto;
+      margin-right: auto;
+      left: 0;
+      right: 0;
+      text-align: center;
+      background-color: hsla(213,18%,75%,0.3);
+    }
+
+    table {
+      padding: 0px;
+    }
+
+    tr {
+      padding: 0px;
+    }
+
+    .instruction {
+      width: 400px;
+      margin: auto;
+      position: relative;
+      font-family: Arial, Helvetica, sans-serif;
+      color: white;
+      text-shadow: 1px 1px black;
+    }
+
+  </style>
+</head>
+<body>
+  <h1>The Bubble Game</h1>
+  <div class="instruction">Score points by popping groups of at least two bubbles!</div>
+  <div class="instruction">The square of the number of bubbles in that group is added to your score. Have fun and happy popping!</div>
+  <div class="instruction"><div class="reset"><button onclick="reset()">Reset</button></div></div>
+  <h2 id="score">Score: 0</h2>
+  <h2 id="gameover"></h2>
+  <div id="grid" class="center"></div>
+  <div id="birds"><marquee scrollamount="5"><img height="50" width="100" src="images/birds.gif"></marquee></div>
+  
+  
+
+<script id="jsbin-javascript">
+console.log("Built over 2 days from 15/5/2020 to 16/5/2020 with addition of game over + reset in 20/10/2020.")
+var grid = [];
+var score = 0;
+
+function scoring(sameList){
+  if(sameList.length>1){
+    score = score + Math.pow(sameList.length,2); //gives the square of the length of bubbles removed
+    return score;
+  }
+  return score;
+}
+
+function sentToSameColour(id){
+  sameList = [];
+  splitter = id.split(","); // handles cases when there are more digits in id
+  y = parseInt(splitter[0]);
+  x = parseInt(splitter[1]);
+  colour = grid[y][x] // save the colour for checking purposes
+  sameColour(grid,y,x);
+  if(sameList.length == 1){
+    grid[y][x] = colour; //if the length of sameList is still one, means that its a single unit, hence reset colour
+  }
+  else{
+    console.log(sameList);
+    sameList = sameList.sort(function(a, b)
+      {
+        return a[0] - b[0];
+      });
+    console.log(sameList);
+    checkGravity(grid,sameList); //check gravity last!
+  };
+  document.getElementById("score").innerHTML = `Score: ${scoring(sameList)}`;
+  document.getElementById("grid").innerHTML = makeTableHTML(grid);
+  checkGameOver(grid)
+}
+
+function checkGameOver(grid) {
+  for(var y=1; y < grid.length; y++){ //start at 1 so corner cases not affected
+    for(var x=0; x< grid[y].length;x++){ //start at 1 so corner cases not affected
+      if(grid[y][x] !== "e"){ //not empty
+        if(x !== 0){
+          if(grid[y][x] === grid[y][x-1]){
+          return console.log("proceed");
+        }
+        }
+        if(grid[y][x] === grid[y-1][x]){
+          return console.log("proceed");
+        }
+      }
+    }
+  }
+  return document.getElementById("gameover").innerHTML = "GAME OVER!";
+}
+
+function makeTableHTML(myArray) {
+    var result = "<table border=0>";
+    for(var y=0; y<myArray.length; y++) {
+        result += "<tr>";
+        for(var x=0; x<myArray[y].length; x++){
+            result += `<td id="${y},${x}" onclick="sentToSameColour(this.id)" onmouseover="hoverIn(this)" onmouseout="hoverOut(this)" class=${myArray[y][x]}></td>`;
+            //console.log(y,x);
+        }
+        result += "</tr>";
+    }
+    result += "</table>";
+
+    return result;
+}
+
+function hoverIn(cell) {
+  var originalClass = cell.className;
+  cell.className = originalClass+"anim"; 
+}
+
+function hoverOut(cell) {
+  cell.className = cell.className[0];
+}
+
+function gravity(grid,y,x){
+  for(var q = y; q > 0; q--){
+    //console.log("handling:",q,x);
+    var store = grid[q][x];
+    //console.log("storing:",grid[q][x]);
+    grid[q][x] = grid[q-1][x];
+    //console.log("swapping:",grid[q][x],"with",grid[q-1][x]);
+    grid[q-1][x] = store;
+  }
+};
+
+function checkGravity(grid,sameList){
+  for(k=0;k<sameList.length;k++){
+    y = sameList[k][0];
+    x = sameList[k][1];
+    gravity(grid,y,x);
+  };
+};
+
+function randomColour(){
+  colour = ['r','g','b'];
+  num = Math.floor(Math.random() * 3);   // returns a random integer from 0 to 2
+  return colour[num];
+}
+
+function generateGrid(rows, columns){
+  for(var i=0; i<rows; i++){
+    horizontal = [];
+    for(var j=0; j<columns; j++){
+      horizontal.push(randomColour());
+    };
+    grid.push(horizontal);
+  };
+}; 
+
+function sameColour(grid,y,x){
+  var colour = grid[y][x];
+  if(sameList.length == 0){
+    sameList.push([y,x]); //sameList is in sentToSameColour
+  };
+  grid[y][x] = 'e';
+  if(y != grid.length-1){ //not at the lowest height
+    if(grid[y+1][x] == colour){ 
+      sameColour(grid,y+1,x); //perform the "search" for neighbouring same colours again
+      sameList.push([y+1,x]);
+    };
+  };
+  if(y != 0){ //not at the highest height
+    if(grid[y-1][x] == colour){ 
+      sameColour(grid,y-1,x);
+      sameList.push([y-1,x]);
+    };
+  };
+  if(x != 0){ //not at the extreme left
+    if(grid[y][x-1] == colour){ 
+      sameColour(grid,y,x-1);
+      sameList.push([y,x-1]);
+    };
+  };
+  if(x != grid[y].length){ //not at the extreme right
+    if(grid[y][x+1] == colour){ 
+      sameColour(grid,y,x+1);
+      sameList.push([y,x+1]);
+    };
+  };
+};
+
+
+function reset(){
+  grid = [];
+  generateGrid(rows,columns);
+  document.getElementById("grid").innerHTML = makeTableHTML(grid);
+  score = 0;
+  document.getElementById("score").innerHTML = "Score: 0";
+  document.getElementById("gameover").innerHTML = "";
+}
+
+
+rows = 10;
+columns = 10;
+generateGrid(rows,columns);
+document.getElementById("grid").innerHTML = makeTableHTML(grid);
+
+</script>
+</body>
+</html>
