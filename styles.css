@@ -1,125 +1,177 @@
-table {
-      table-layout: fixed;
-      width:100%;
-      height:100%;
-      padding:0px;
-    }
 .b {
-      background-image: url(images/blue.png);
-      background-size: 100% 100%;
-      height: 5%;
-      width: 5%; /*custom for 20x20 grid - 100%/20 means each element is 5%*/
-      background-repeat: no-repeat;
-    }
+  background-color: rgb(40, 40, 171);
+  background-size: 100% 100%;
+  border-radius: 50%;
+  height: 3vw;
+  width: 3vw;
+  background-repeat: no-repeat;
+}
 
-    .banim {
-      background-image: url(images/blueanim.gif);
-      background-size: 100% 100%;
-      height: 5%;
-      width: 5%;
-      background-repeat: no-repeat;
-    }
+.banim {
+  background-color: rgb(40, 40, 171);
+  -webkit-animation: mover 0.25s infinite alternate;
+  animation: mover 0.25s infinite alternate;
+  border-radius: 50%;
+  background-size: 100% 100%;
+  height: 3vw;
+  width: 3vw;
+  background-repeat: no-repeat;
+}
 
-    .r {
-      background-image: url(images/red.png);
-      background-size: 100% 100%;
-      height: 5%;
-      width: 5%;
-      background-repeat: no-repeat;
-    }
+.r {
+  background-color: rgb(171, 40, 51);
+  background-size: 100% 100%;
+  border-radius: 50%;
+  height: 3vw;
+  width: 3vw;
+  background-repeat: no-repeat;
+}
 
-    .ranim {
-      background-image: url(images/redanim.gif);
-      background-size: 100% 100%;
-      height: 5%;
-      width: 5%;
-      background-repeat: no-repeat;
-    }
+.ranim {
+  background-color: rgb(171, 40, 51);
+  -webkit-animation: mover 0.25s infinite alternate;
+  animation: mover 0.25s infinite alternate;
+  border-radius: 50%;
+  background-size: 100% 100%;
+  height: 3vw;
+  width: 3vw;
+  background-repeat: no-repeat;
+}
 
-    .g {
-      background-image: url(images/green.png);
-      background-size: 100% 100%;
-      height: 5%;
-      width: 5%;
-      background-repeat: no-repeat;
-    }
+.g {
+  background-color: rgb(40, 171, 127);
+  background-size: 100% 100%;
+  border-radius: 50%;
+  height: 3vw;
+  width: 3vw;
+  background-repeat: no-repeat;
+}
 
-    .ganim {
-      background-image: url(images/greenanim.gif);
-      background-size: 100% 100%;
-      height: 5%;
-      width: 5%;
-      background-repeat: no-repeat;
-    }
+.ganim {
+  background-color: rgb(40, 171, 127);
+  -webkit-animation: mover 0.25s infinite alternate;
+  animation: mover 0.25s infinite alternate;
+  border-radius: 50%;
+  background-size: 100% 100%;
+  height: 3vw;
+  width: 3vw;
+  background-repeat: no-repeat;
+}
 
-    .e {
-      background-size: 100% 100%;
-      height: 5%;
-      width: 5%;
-    }
+body {
+  background: radial-gradient(#1b2735 0%, #090a0f 100%);
+  height: 100%;
+}
 
-    .eanim {
-      background-size: 100% 100%;
-      height: 5%;
-      width: 5%;
-    }
+h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  text-shadow: 1px 1px black;
+  text-align: center;
+}
 
-    body {
-      background-image: url(images/background.jpg); 
-    }
+h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 100;
+  color: white;
+  text-shadow: 1px 1px black;
+  text-align: center;
+}
 
-    h1 {
-      font-family: Arial, Helvetica, sans-serif;
-      color: white;
-      text-shadow: 1px 1px black;
-      text-align: center;
-    }
+table {
+  padding: 0px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
-    h2 {
-      font-family: Arial, Helvetica, sans-serif;
-      font-weight: 100;
-      color: white;
-      text-shadow: 1px 1px black;
-      text-align: center;
-    }
+tr {
+  padding: 0px;
+}
 
+.instruction {
+  width: 50%;
+  text-align: center;
+  margin: auto;
+  position: relative;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  text-shadow: 1px 1px black;
+  margin-top: 2em;
+}
 
-    .center {
-      margin: auto;
-      width: 400px; /* fixed width for 20x20 grid (20px * 20 columns = 400px) */
-      height: 400px;
-      border: 3px solid whitesmoke;
-    }
+.reset {
+  margin: 1em;
+  padding: 0.5em;
+  border-radius: 10%;
+}
 
-    #birds {
-      position: relative;
-      z-index: 1;
-    }
+@-webkit-keyframes mover {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-0.2em);
+  }
+}
 
-    #grid {
-      z-index: 2;
-      position: absolute;
-      margin-left: auto;
-      margin-right: auto;
-      left: 0;
-      right: 0;
-      text-align: center;
-      background-color: hsla(213,18%,75%,0.3);
-    }
+@media only screen and (max-width: 600px) {
+  .b {
+    background-color: rgb(40, 40, 171);
+    background-size: 100% 100%;
+    border-radius: 50%;
+    height: 4vh;
+    width: 4vh;
+    background-repeat: no-repeat;
+  }
 
-    table {
-      padding: 0px;
-    }
+  .banim {
+    background-color: rgb(40, 40, 171);
+    -webkit-animation: mover 0.25s infinite alternate;
+    animation: mover 0.25s infinite alternate;
+    border-radius: 50%;
+    background-size: 100% 100%;
+    height: 4vh;
+    width: 4vh;
+    background-repeat: no-repeat;
+  }
 
-    tr {
-      padding: 0px;
-    }
+  .r {
+    background-color: rgb(171, 40, 51);
+    background-size: 100% 100%;
+    border-radius: 50%;
+    height: 4vh;
+    width: 4vh;
+    background-repeat: no-repeat;
+  }
 
-    .instruction {
-      width: 400px;
-      margin: auto;
-      position: relative;
-      font-family: Arial, Helvetica, sans-serif;
-      color: white;
-      text-shadow: 1px 1px black;
-    }
+  .ranim {
+    background-color: rgb(171, 40, 51);
+    -webkit-animation: mover 0.25s infinite alternate;
+    animation: mover 0.25s infinite alternate;
+    border-radius: 50%;
+    background-size: 100% 100%;
+    height: 4vh;
+    width: 4vh;
+    background-repeat: no-repeat;
+  }
+
+  .g {
+    background-color: rgb(40, 171, 127);
+    background-size: 100% 100%;
+    border-radius: 50%;
+    height: 4vh;
+    width: 4vh;
+    background-repeat: no-repeat;
+  }
+
+  .ganim {
+    background-color: rgb(40, 171, 127);
+    -webkit-animation: mover 0.25s infinite alternate;
+    animation: mover 0.25s infinite alternate;
+    border-radius: 50%;
+    background-size: 100% 100%;
+    height: 4vh;
+    width: 4vh;
+    background-repeat: no-repeat;
+  }
+}

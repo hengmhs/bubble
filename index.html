@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Bubble Game</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <h1>The Bubble Game</h1>
-  <div class="instruction">Score points by popping groups of at least two bubbles!</div>
-  <div class="instruction">The square of the number of bubbles in that group is added to your score. Have fun and happy popping!</div>
-  <div class="instruction"><div class="reset"><button onclick="reset()">Reset</button></div></div>
-  <h2 id="score">Score: 0</h2>
-  <h2 id="gameover"></h2>
-  <div id="grid" class="center"></div>
-  <div id="birds"><marquee scrollamount="5"><img height="50" width="100" src="images/birds.gif"></marquee></div>
-
-<script src="source.js"></script>>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Bubble Game</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="source.js"></script>
+  </head>
+  <body>
+    <h1>The Bubble Game</h1>
+    <h2 id="score">Score: 0</h2>
+    <h2 id="gameover"></h2>
+    <div id="grid"></div>
+    <div class="instruction">
+      <div>Score points by popping groups of at least two bubbles.</div>
+      <div>
+        The square of the number of bubbles in that group is added to your
+        score. Have fun and happy popping :)
+      </div>
+      <div>
+        <div><button onclick="reset()" class="reset">Reset</button></div>
+      </div>
+    </div>
+  </body>
 </html>
