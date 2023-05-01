@@ -9,12 +9,12 @@ Play the game [here](https://hengmhs.github.io/bubble/).
 
 **Starting**
 
-![game][screenshots/game.png]
+![game](screenshots/game.png)
 
 **Playing**
 
-![game2][screenshots/game2.png]
+![game2](screenshots/game2.png)
 
 **Game Over**
 
-![game3][screenshots/game3.png]
+![game3](screenshots/game3.png)
